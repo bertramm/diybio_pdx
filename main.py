@@ -239,7 +239,7 @@ while(True):
         
         if message_one is not None:
             
-            volts = int(message_one.split(':')[1])*MAX_VOLTAGE/CHANNEL_BITS/100.0
+            volts = int(message_one.split(':')[1])*MAX_VOLTAGE/CHANNEL_BITS
             channel = message_one.split(':')[0]
             
             readings.append([volts,channel]) 
