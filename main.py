@@ -15,7 +15,7 @@ from ftplib import FTP
 
 FTP_HOST = 'alamedalabs.com'
 FTP_USER = 'bot@alamedalabs.com'
-FTP_PASS = 'laser@45'
+FTP_PASS = '<enter password>'
 
 
 #-------------------------------------------------------------------------------
