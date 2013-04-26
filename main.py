@@ -15,7 +15,7 @@ from ftplib import FTP
 
 FTP_HOST = 'alamedalabs.com'
 FTP_USER = 'bot@alamedalabs.com'
-FTP_PASS = '<passowrd>'
+FTP_PASS = '<password>'
 
 
 #-------------------------------------------------------------------------------
@@ -26,11 +26,11 @@ MEASUREMENT_STORAGE_FILE = 'mfc_raw_data.json'
 MEASUREMENT_STORAGE_DESCRIPTOR = 'MFC-battery data' #General data holder
 
 
-CHANNEL_NAME_SHEET = {'CO':'Aaron & Josh',
-                      'C1':'Mitch',
-                      'C2':'Marshal & Gabbi',
-                      'C3':'Matt B.',
-                      'C4':'Little Brownie',
+CHANNEL_NAME_SHEET = {'C0':'Erin_Josh',
+                      'C1':'MIZNATCH',
+                      'C2':'Marshal_Gabbi',
+                      'C3':'Matt',
+                      'C4':'Little_Brownie',
                       'C5':'Avishan',
                       'C6':'Nathan',
                       'C7':'JRDMFC'
@@ -55,7 +55,7 @@ SAVE_REMOTELY_FREQUENCY = 11 #minutes
 #-------------------------------------------------------------------------------
 #Run in simulation mode if the microcontroller is not hooked up
 
-SIMULATION_MODE = True
+SIMULATION_MODE = False
 
 
 #-------------------------------------------------------------------------------
@@ -175,7 +175,7 @@ start_time_three =datetime.datetime.now()
 if SIMULATION_MODE == True:
     volts = 0
 
-
+readings = []
 #---------------------------------------------------------------------------------
 #main logic loop
 while(True):
@@ -207,8 +207,10 @@ while(True):
         start_time_two = datetime.datetime.now()
         print "Logging remotely: " , start_time_two
         
+        
+        
         save(my_dict,MEASUREMENT_STORAGE_FILE,ftp,True)
-
+        readings = []
                                 
  
  
@@ -240,20 +242,22 @@ while(True):
             volts = int(message_one.split(':')[1])*MAX_VOLTAGE/CHANNEL_BITS/100.0
             channel = message_one.split(':')[0]
             
-    
+            readings.append([volts,channel]) 
     
     #---------------------------------------------------------------------------------
     #Only only if it's time to record
         
     if   diff_time_three.seconds > LOG_FREQUENCY:
         
-        print "logging data: ", start_time_three
         
-        print round(volts*1000,1)
-        start_time_three = datetime.datetime.now()
-        my_dict['measurements'].append({"power(mW)": round(volts/LOAD_RESIST,3), 
-                                        "voltage(mV)": round(volts*1000,1), 
-                                        "name": CHANNEL_NAME_SHEET[channel],
-                                        "time": json.dumps(datetime.datetime.now(), default=dthandler).replace('\"','')
-                                        })
-
+        for each in readings[-10:]:
+            print "logging data: ", start_time_three
+            
+            print round(each[0]*1000,1)
+            start_time_three = datetime.datetime.now()
+            my_dict['measurements'].append({"power(mW)": round(each[0]/LOAD_RESIST,3), 
+                                            "voltage(mV)": round(each[0]*1000,1), 
+                                            "name": CHANNEL_NAME_SHEET[each[1]],
+                                            "time": json.dumps(datetime.datetime.now(), default=dthandler).replace('\"','')
+                                            })
+    

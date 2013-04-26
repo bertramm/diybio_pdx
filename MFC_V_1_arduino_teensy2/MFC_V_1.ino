@@ -54,14 +54,24 @@ void loop() {
   // send the value of analog input 0:
   
   int x;
+
   for ( x = 0; x < 8; x++ ) {
         /* Keep in mind that the loop condition checks 
            the conditional statement before it loops again.
            consequently, when x equals 10 the loop breaks.
            x is updated before the condition is checked. */ 
            
+        char buffer[60];
+        char str[15];
+        char a[15];
+        strcpy (buffer,"C");
+        sprintf(str, "%d", x);
+        sprintf(a, "%d", analog_read[x]);
+        strcat (buffer, str);
+        strcat (buffer, ":");
+        strcat (buffer, a);
         
-        Serial.println(analog_read[x]);
+        Serial.println(buffer);
     }
   
   // wait a bit for the analog-to-digital converter 
