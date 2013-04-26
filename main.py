@@ -15,7 +15,7 @@ from ftplib import FTP
 
 FTP_HOST = 'alamedalabs.com'
 FTP_USER = 'bot@alamedalabs.com'
-FTP_PASS = '<enter password>'
+FTP_PASS = '<passowrd>'
 
 
 #-------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ CHANNEL_NAME_SHEET = {'CO':'Aaron & Josh',
                       'C4':'Little Brownie',
                       'C5':'Avishan',
                       'C6':'Nathan',
-                      'C7':'Justin'
+                      'C7':'JRDMFC'
                       }
 
 #-------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ if SIMULATION_MODE == False:
 my_dict = init(MEASUREMENT_STORAGE_FILE,MEASUREMENT_STORAGE_DESCRIPTOR)
    
 #manually reset the dictionary, un comment this if you want to wipe previous data   
-#my_dict = {'descriptor': MEASUREMENT_STORAGE_DESCRIPTOR ,'measurements':[]}
+my_dict = {'descriptor': MEASUREMENT_STORAGE_DESCRIPTOR ,'measurements':[]}
 
 
 #-------------------------------------------------------------------------------
@@ -253,8 +253,7 @@ while(True):
         start_time_three = datetime.datetime.now()
         my_dict['measurements'].append({"power(mW)": round(volts/LOAD_RESIST,3), 
                                         "voltage(mV)": round(volts*1000,1), 
-                                        "name": "test name", 
-                                        "Channel": CHANNEL_NAME_SHEET[channel],
+                                        "name": CHANNEL_NAME_SHEET[channel],
                                         "time": json.dumps(datetime.datetime.now(), default=dthandler).replace('\"','')
                                         })
 
