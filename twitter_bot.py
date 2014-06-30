@@ -15,10 +15,10 @@ def tweet(tweet_status):
     
     # OAuth authentication
     api = twitter.Api(
-    consumer_key = 'IJ69UOCvmk4slkgzJBDsWg',
-    consumer_secret = '9wy4MDF2GXd1dkOrtbofXZYSoGO5btxDzyTBlLTSOc',
-    access_token_key = '1366362246-GQw4OJBu9FTMKOHgn0aCql82PwuZzltk8v6trWr',
-    access_token_secret = 'HPbqJZg6vNTAS9X63kA2LriQBmRxyikJLintT9ZA'
+    consumer_key = '##',
+    consumer_secret = '##',
+    access_token_key = '##',
+    access_token_secret = '##'
     )
     
     status = api.PostUpdate(tweet_status)
@@ -30,9 +30,9 @@ def tweet(tweet_status):
 #-------------------------------------------------------------------------------
 # FTP site credentials, for uploading data to a server 
 
-FTP_HOST = 'alamedalabs.com'
-FTP_USER = 'bot@alamedalabs.com'
-FTP_PASS = 'laser@45'
+FTP_HOST = '##'
+FTP_USER = '##'
+FTP_PASS = '##'
 
 
 
